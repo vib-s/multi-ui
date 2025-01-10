@@ -2,8 +2,9 @@ package edu.bothell.multi_ui.core;
 
 public class Player {
 
-    private char   chr = 'x';
-    private String sId = "";
+    private char    chr     = 'x';
+    private String  sId     = "";
+    private int     noTiles = 0;
 
     public Player(){
     }
@@ -22,5 +23,9 @@ public class Player {
 
     public String getSId(){
         return this.sId;
+    }
+
+    public getNoTiles(){
+        
     }
 }

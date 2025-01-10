@@ -2,6 +2,8 @@ package edu.bothell.multi_ui.core;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.skin.TextInputControlSkin.Direction;
+
 
 public class Game {
     private final int                  MAX_PLAYERS = 3;
@@ -39,6 +41,7 @@ public class Game {
     
     public boolean isValid(int[] pos, String sId){
         System.out.println("isVAlid?"+s.getIt(pos)+"|" + sId+"|" + active.getSId()+"|");
+        if(s.end()) 
         return s.isOpen(pos) && active.getSId().equals(sId);
     }
 
@@ -46,6 +49,12 @@ public class Game {
         if(!isValid(pos, sId)) return ' ';
         turn++;
         this.s.setIt(active.getChar(), pos[0], pos[1]);
+        if(isValid(this.s.getAdj(pos[0], pos[1], Directions.E), sId)) this.s.setIt(active.getChar(), pos[0], pos[1]);
+        if(isValid(this.s.getAdj(pos[0], pos[1], Directions.W), sId)) this.s.setIt(active.getChar(), pos[0], pos[1]);
+        if(isValid(this.s.getAdj(pos[0], pos[1], Directions.NE), sId)) this.s.setIt(active.getChar(), pos[0], pos[1]);
+        if(isValid(this.s.getAdj(pos[0], pos[1], Directions.NW), sId)) this.s.setIt(active.getChar(), pos[0], pos[1]);
+        if(isValid(this.s.getAdj(pos[0], pos[1], Directions.SE), sId)) this.s.setIt(active.getChar(), pos[0], pos[1]);
+        if(isValid(this.s.getAdj(pos[0], pos[1], Directions.SW), sId)) this.s.setIt(active.getChar(), pos[0], pos[1]);
         this.active = p.get( turn % p.size() );
 
         return active.getChar();
