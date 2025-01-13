@@ -25,7 +25,11 @@ public class Player {
         return this.sId;
     }
 
-    public getNoTiles(){
-        
+    public int getNoTiles(){
+        return this.noTiles;
+    }
+
+    public void addTile(){
+        this.noTiles++;
     }
 }
