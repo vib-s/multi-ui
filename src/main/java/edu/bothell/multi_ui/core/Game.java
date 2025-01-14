@@ -52,6 +52,10 @@ public class Game {
         return true;
     }
 
+    public Player winningPlayer(){
+        
+    }
+
     public char play(int[] pos, String sId){
         if(!isValid(pos, sId)) return ' ';
         turn++;
@@ -62,6 +66,7 @@ public class Game {
             loc = this.s.getAdj(pos[0], pos[1], d);
             if(isValid(loc, sId)){
                 this.s.setIt(active.getChar(), loc[0], loc[1]);
+                active.addTile();
             }
         }
         
