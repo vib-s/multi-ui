@@ -53,7 +53,13 @@ public class Game {
     }
 
     public Player winningPlayer(){
-        
+        Player winningPlayer = new Player();
+        for(Player player : this.p){
+            if(player.getNoTiles() > winningPlayer.getNoTiles()){
+                winningPlayer = player;
+            }
+        }
+        return winningPlayer;
     }
 
     public char play(int[] pos, String sId){
