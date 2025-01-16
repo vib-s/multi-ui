@@ -7,6 +7,9 @@ public class Transit {
     public String[][]   t;
     public char         a;
 
+    public boolean      over;
+    public String       playerWon;
+
     public Transit(char[][] state, char active){
         this.s = state;
         this.a = active;
@@ -27,6 +30,13 @@ public class Transit {
                 t[y][x] += " w" + walls[y][x];
             }
         }
+    }
+
+    public Transit(char[][] state, char active, String[][] terrain, boolean over){
+        this.s = state;
+        this.a = active;
+        this.t = terrain;
+        this.over = over;
     }
 }
  

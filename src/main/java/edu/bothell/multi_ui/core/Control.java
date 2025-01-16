@@ -85,6 +85,10 @@ public class Control {
         return ts;
     }
 
+    public boolean getOver(){
+        return g.end();
+    } 
+
     public String checkConnected(int x, int y) {
         return "" + getLocation(x, y).getMatchTerrain(null);
         //throw new UnsupportedOperationException("Unimplemented method 'checkConnected'");

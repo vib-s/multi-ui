@@ -9,11 +9,13 @@ public class Game {
     private final State                s;
     private int                        turn;
     private Player                     active;
+    private Control                    c;
 
     public Game(Control c){
         this.turn = 0;
         this.s = new World();
         this.p = new ArrayList<>();
+        this.c = c;
     }
     
     public Player addPlayer(Player p){
@@ -39,7 +41,7 @@ public class Game {
     
     public boolean isValid(int[] pos, String sId){
         System.out.println("isVAlid?"+s.getIt(pos)+"|" + sId+"|" + active.getSId()+"|");
-        if (pos[0] >= 2 && pos[1] >= 2) return false;
+        if (pos[0] > 2 || pos[1] > 2) return false;
         return s.isOpen(pos) && active.getSId().equals(sId);
     }
 
@@ -109,11 +111,11 @@ public class Game {
 
     public char play(int[] pos, String sId){
         if(!isValid(pos, sId)) return ' ';
-        turn++;
         this.s.setIt(active.getChar(), pos[0], pos[1]);
-
+        turn++;
+        
         if(end()){
-
+            System.exit(0);
         }
         
         this.active = p.get( turn % p.size() );
