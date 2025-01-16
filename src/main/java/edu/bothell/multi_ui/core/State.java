@@ -3,7 +3,7 @@ package edu.bothell.multi_ui.core;
 import java.util.Arrays;
 
 public class State implements Statable<int[]> {
-    public final char[][]   S = new char[16][28];
+    public final char[][]   S = new char[15][23];
     /*[][]//[64][96];
     {
         {' ',' ',' ',' ',' ',' '},
@@ -47,7 +47,12 @@ public class State implements Statable<int[]> {
 
     @Override
     public boolean isOpen(int[] pos){
-        return S[pos[1]][pos[0]] == ' ';
+        try{
+            return S[pos[1]][pos[0]] == ' ';
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            return false;
+        }
     }
 
     @Override
