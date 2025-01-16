@@ -39,17 +39,62 @@ public class Game {
     
     public boolean isValid(int[] pos, String sId){
         System.out.println("isVAlid?"+s.getIt(pos)+"|" + sId+"|" + active.getSId()+"|");
-        if(end()) System.exit(0);
+        if (pos[0] >= 2 && pos[1] >= 2) return false;
         return s.isOpen(pos) && active.getSId().equals(sId);
     }
 
     public boolean end(){
+        return (tie() || checkWin());
+    }
+
+    public boolean tie(){
         for(char[] cs : s.S){
             for(char c : cs){
                 if(c == ' ') return false;
             }
         }
         return true;
+    }
+
+    public boolean checkWin(){
+        // checks if the positive diagonal is true
+        boolean winDiagonalPos = true;
+        // checks if the negative diagonal is true
+        boolean winDiagonalNeg = true;
+        // checks if the player won horizontally
+        boolean winHorizontally;
+        // checks if the player won vertically
+        boolean winVertically;
+
+        char c = active.getChar();
+
+        // primary outside loop
+        for(int y = 0; y < 3; y++){
+            // checking if diagonals are false
+            if(this.s.S[y][y] != c) winDiagonalPos = false;
+            if(this.s.S[2 - y][y] != c) winDiagonalNeg = false;
+
+            // loops for horizontal and vertical wins
+            // set horizontal wins and vertical wins to true before starting to check
+            winHorizontally = true;
+            winVertically = true;
+            // iterate over each slot to check if it is a win
+            for(int x = 0; x < 3; x++){
+                // checking if horizontal is false
+                if(this.s.S[y][x] != c) winHorizontally = false;
+                // checking if vertical is false
+                // for vertical x and y are opposite
+                if(this.s.S[x][y] != c) winVertically = false;
+            }
+            // if horizontal still remains true that means the player won horizontally
+            // if vertical still remains true that means the player won vertically
+            if(winHorizontally || winVertically) return true;
+        }
+        // iteration through board done
+
+        // if the player won through diagonals it returns true, otherwise return false
+        return (winDiagonalNeg || winDiagonalPos);
+    
     }
 
     public Player winningPlayer(){
@@ -67,13 +112,8 @@ public class Game {
         turn++;
         this.s.setIt(active.getChar(), pos[0], pos[1]);
 
-        int[] loc;
-        for(Directions d: Directions.values()){
-            loc = this.s.getAdj(pos[0], pos[1], d);
-            if(isValid(loc, sId)){
-                this.s.setIt(active.getChar(), loc[0], loc[1]);
-                active.addTile();
-            }
+        if(end()){
+
         }
         
         this.active = p.get( turn % p.size() );
