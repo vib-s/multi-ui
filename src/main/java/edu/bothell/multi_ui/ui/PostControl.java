@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.bothell.multi_ui.core.Control;
@@ -54,6 +55,17 @@ public class PostControl {
         m.addAttribute("role", i);
 
         return "game";
+    }
+
+    @PostMapping("/test")
+    public String postTest(@RequestBody String entity){
+        System.out.println();
+        System.out.println();
+        System.out.println(entity);
+        System.out.println();
+        System.out.println();
+
+        return "redirect:/";
     }
 
     @PostMapping("/update")
